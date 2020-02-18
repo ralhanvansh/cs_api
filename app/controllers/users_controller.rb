@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token = JWT.encode({user_id: @user.id}, Rails.application.secrets.secret_key_base)
-      render json: {token: token, message: "User Created"}, status: :created
+      render json: {user: @user, token: token, message: "User Created"}, status: :created
     else
       render json: @user.errors
     end
