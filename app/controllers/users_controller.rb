@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if user 
       if user.authenticate(user_params[:password])
         token = JWT.encode({user_id: user.id}, Rails.application.secrets.secret_key_base)
-        render json: {message: "User Login Successful", token: token}
+        render json: {user: user, message: "User Login Successful", token: token}
       else
         render json: {errors: "Invalid Credentials"}
       end
